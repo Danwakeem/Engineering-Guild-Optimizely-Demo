@@ -1,5 +1,5 @@
 import React from 'react';
-import { PageHeader } from 'antd';
+import { PageHeader, Button } from 'antd';
 import Head from 'next/head'
 import styled from 'styled-components';
 import { PuppyList } from '../components/PuppyList';

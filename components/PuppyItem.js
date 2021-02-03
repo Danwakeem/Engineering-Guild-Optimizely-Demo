@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext, useState }  from 'react';
 import { DollarCircleOutlined } from '@ant-design/icons';
-import { List, Button, Space } from 'antd';
+import { List, Space } from 'antd';
 import styled from 'styled-components';
+import { TrackingButton } from './TackingButton';
+import { AppContext } from '../context/app.context';
 
 const IconText = ({ icon, text }) => (
   <Space>
@@ -17,20 +19,33 @@ export const PuppyItem = ({
   price,
   img
 }) => {
-  /* extra={
-    <img
-      width={272}
-      alt="logo"
-      src={img}
-    />
-  } */
+  const {
+    versionBId,
+    currentVersion
+  } = useContext(AppContext);
+  const isVersionB = currentVersion === versionBId;
+  const [buttonText, setButtonText] = useState('Adopt Me Now');
+  const [isAdopted, setIsAdopted] = useState(false);
+
+  const onButtonClick = () => {
+    setIsAdopted(true);
+    setButtonText('Adopted! 😎');
+  }
+
   return (
     <StyledItem
       key={id}
       actions={[
         <IconText icon={DollarCircleOutlined} text={price} key="list-vertical-dollar-circle-o" />,
-        <Button key="adopt-button" type="primary">Adopt Me Now</Button>
+        <TrackingButton disabled={isAdopted} eventName='adopted_puppy' revenue={parseInt(price.replace('$','').replace('.', ''))} onClick={onButtonClick} key="adopt-button" type="primary">{buttonText}</TrackingButton>
       ]}
+      extra={
+        isVersionB && <img
+          width={272}
+          alt="logo"
+          src={img}
+        />
+      }
     >
       <List.Item.Meta
         title={name}
