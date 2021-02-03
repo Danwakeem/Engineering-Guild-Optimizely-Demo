@@ -17,6 +17,13 @@ export const PuppyItem = ({
   price,
   img
 }) => {
+  /* extra={
+    <img
+      width={272}
+      alt="logo"
+      src={img}
+    />
+  } */
   return (
     <StyledItem
       key={id}
@@ -24,13 +31,6 @@ export const PuppyItem = ({
         <IconText icon={DollarCircleOutlined} text={price} key="list-vertical-dollar-circle-o" />,
         <Button key="adopt-button" type="primary">Adopt Me Now</Button>
       ]}
-      extra={
-        <img
-          width={272}
-          alt="logo"
-          src={img}
-        />
-      }
     >
       <List.Item.Meta
         title={name}
