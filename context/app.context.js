@@ -20,7 +20,7 @@ export const AppProvider = ({
   }
 
   useEffect(() => {
-    if (process.browser && !queryVersion) {
+    if (process.browser && window.optimizely && !queryVersion) {
       const map = (window?.optimizely?.get('state').getVariationMap() || {});
       setCurrentVersion(map[experimentId]?.id);
     } else if (queryVersion) {
